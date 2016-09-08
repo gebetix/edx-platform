@@ -35,7 +35,7 @@ class @Problem
     @checkButtonCheckText = @checkButtonLabel.text()
     @checkButtonCheckingText = @checkButton.data('checking')
     @checkButton.click @check_fd
-    @hintButton = @$('div.action button.hint-button')
+    @hintButton = @$('.hint-button')
     @hintButton.click @hint_button
     @resetButton = @$('div.action button.reset')
     @resetButton.click @reset
@@ -825,18 +825,29 @@ class @Problem
   hint_button: =>
     # Store the index of the currently shown hint as an attribute.
     # Use that to compute the next hint number when the button is clicked.
-    hint_index = @$('.problem-hint').attr('hint_index')
+    hint_container = @.$('.problem-hint')
+    hint_index = hint_container.attr('hint_index')
     if hint_index == undefined
       next_index = 0
     else
       next_index = parseInt(hint_index) + 1
     $.postWithPrefix "#{@url}/hint_button", hint_index: next_index, input_id: @id, (response) =>
-      hint_container = @.$('.problem-hint')
-      hint_container.html(response.contents)
-      MathJax.Hub.Queue [
-        'Typeset'
-        MathJax.Hub
-        hint_container[0]
-      ]
-      hint_container.attr('hint_index', response.hint_index)
+
+# What to do about this? Test with Math in the hint text to make sure it is typeset someplace else.
+#      MathJax.Hub.Queue [
+#        'Typeset'
+#        MathJax.Hub
+#        hint_container[0]
+#      ]
+#
+      # Event the change?
+      debugger
+      if response.success
+        @render(response.html)
+        hint_container = @.$('.problem-hint')
+        hint_container.attr('hint_index', response.hint_index)
+      else
+        @gentle_alert response.success
+
+      # TODO: instead move focus to hint notification as callback in render
       @$('.hint-button').focus()  # a11y focus on click, like the Check button

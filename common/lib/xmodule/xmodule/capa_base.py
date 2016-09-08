@@ -29,6 +29,8 @@ from django.utils.timezone import UTC
 from xmodule.capa_base_constants import RANDOMIZATION, SHOWANSWER
 from django.conf import settings
 
+from openedx.core.djangolib.markup import HTML, Text
+
 log = logging.getLogger("edx.courseware")
 
 # Make '_' a no-op so we can scrape strings. Using lambda instead of
@@ -580,31 +582,44 @@ class CapaMixin(CapaFields):
         hint_index = hint_index % len(demand_hints)
 
         _ = self.runtime.service(self, "i18n").ugettext
-        hint_element = demand_hints[hint_index]
-        hint_text = get_inner_html_from_xpath(hint_element)
-        if len(demand_hints) == 1:
-            prefix = _('Hint: ')
-        else:
-            # Translators: e.g. "Hint 1 of 3" meaning we are showing the first of three hints.
-            prefix = _('Hint ({hint_num} of {hints_count}): ').format(hint_num=hint_index + 1,
-                                                                      hints_count=len(demand_hints))
 
-        # Log this demand-hint request
+        counter = 0
+        total_text = ''
+        while counter <= hint_index:
+            # TODO: update translator comment
+            # Translators: e.g. "Hint 1 of 3" meaning we are showing the first of three hints.
+
+            new_hint = HTML(_('<strong>{hint_number_prefix}</strong> {hint_text}').format(
+                hint_number_prefix = Text(_("Hint ({hint_num} of {hints_count}):").format(
+                    hint_num=counter + 1, hints_count=len(demand_hints))
+                ),
+                hint_text=Text(get_inner_html_from_xpath(demand_hints[counter]))  # TODO: can this be HTML?
+            ))
+
+            if counter == 0:
+                total_text = new_hint
+            else:
+                total_text = HTML('{existing_hints}<br>{new_hint}'.format(existing_hints=total_text, new_hint=new_hint))
+
+            counter+=1
+
+        # Log this demand-hint request. Note that this only logs the last requested (although now
+        # all previously shown hints are still displayed.
         event_info = dict()
         event_info['module_id'] = self.location.to_deprecated_string()
         event_info['hint_index'] = hint_index
         event_info['hint_len'] = len(demand_hints)
-        event_info['hint_text'] = hint_text
+        event_info['hint_text'] = get_inner_html_from_xpath(demand_hints[hint_index])
         self.runtime.publish(self, 'edx.problem.hint.demandhint_displayed', event_info)
 
         # We report the index of this hint, the client works out what index to use to get the next hint
         return {
             'success': True,
-            'contents': prefix + hint_text,
-            'hint_index': hint_index
+            'hint_index': hint_index,
+            'html': self.get_problem_html(encapsulate=False, demand_hint_text=total_text)
         }
 
-    def get_problem_html(self, encapsulate=True):
+    def get_problem_html(self, encapsulate=True, demand_hint_text=None):
         """
         Return html for the problem.
 
@@ -653,8 +668,14 @@ class CapaMixin(CapaFields):
             'answer_available': self.answer_available(),
             'attempts_used': self.attempts,
             'attempts_allowed': self.max_attempts,
-            'demand_hint_possible': demand_hint_possible
+            'demand_hint_possible': demand_hint_possible,
+            'demand_hint_present': demand_hint_text is not None
         }
+
+        if demand_hint_text:
+            context['hint_notification_type'] = 'warning'
+            context['hint_notification_icon'] = 'save'
+            context['hint_notification_message'] = demand_hint_text
 
         html = self.runtime.render_template('problem.html', context)
 
