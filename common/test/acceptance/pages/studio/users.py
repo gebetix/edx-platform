@@ -168,6 +168,8 @@ class CourseTeamPage(CoursePage, UsersPageMixin):
     """
     Course Team page in Studio.
     """
+    def is_browser_on_page(self):
+        pass
 
     url_path = "course_team"
 
