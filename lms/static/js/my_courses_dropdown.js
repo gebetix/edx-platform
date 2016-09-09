@@ -2,9 +2,9 @@ $(document).ready(function() {
     'use strict';
 
     // define variables for code legibility
-    var dropdownMenuToggle = $('.dropdown');
-    var dropdownMenu = $('.dropdown-menu');
-    var menuItems = dropdownMenu.find('a');
+    var $dropdownMenuToggle = $('.dropdown');
+    var $dropdownMenu = $('.dropdown-menu');
+    var menuItems = $dropdownMenu.find('.dropdown-menuitem');
 
     var keyCodes = {
         leftArrow: 37,
@@ -18,27 +18,22 @@ $(document).ready(function() {
 
 
     // bind menu toggle click for later use
-    dropdownMenuToggle.toggle(function() {
-        dropdownMenu.addClass('expanded').find('a').first().focus();
-        dropdownMenuToggle.addClass('active').attr('aria-expanded', 'true');
+    $dropdownMenuToggle.toggle(function() {
+        $dropdownMenu.addClass('expanded').find('.dropdown-menuitem').first()
+            .focus();
+        $dropdownMenuToggle.addClass('active').attr('aria-expanded', 'true');
     }, function() {
-        dropdownMenu.removeClass('expanded');
-        dropdownMenuToggle.removeClass('active').attr('aria-expanded', 'false').focus();
+        $dropdownMenu.removeClass('expanded');
+        $dropdownMenuToggle.removeClass('active').attr('aria-expanded', 'false').focus();
     });
 
-    // catch keypresses when focused on dropdownMenuToggle (we only care about spacebar keypresses here)
-    dropdownMenuToggle.on('keydown', function(event) {
+    // catch keypresses when focused on $dropdownMenuToggle (we only care about spacebar keypresses here)
+    $dropdownMenuToggle.on('keydown', function(event) {
         // if space key pressed
         if (event.which === keyCodes.space) {
-            dropdownMenuToggle.click();
+            $dropdownMenuToggle.click();
             event.preventDefault();
         }
-    });
-
-    // catch keypresses when inside dropdownMenu
-    // (we want to catch spacebar; escape; up arrow or shift+tab; and down arrow or tab)
-    dropdownMenu.on('keydown', function(event) {
-        catchKeyPress($(this), event);
     });
 
     function catchKeyPress(object, event) {
@@ -56,13 +51,13 @@ $(document).ready(function() {
 
         // if space key pressed
         if (event.which === keyCodes.space) {
-            dropdownMenuToggle.click();
+            $dropdownMenuToggle.click();
             event.preventDefault();
         }
 
         // if escape key pressed
         if (event.which === keyCodes.escape) {
-            dropdownMenuToggle.click();
+            $dropdownMenuToggle.click();
             event.preventDefault();
         }
 
@@ -89,4 +84,10 @@ $(document).ready(function() {
             event.preventDefault();
         }
     }
+
+    // catch keypresses when inside $dropdownMenu
+    // (we want to catch spacebar; escape; up arrow or shift+tab; and down arrow or tab)
+    $dropdownMenu.on('keydown', function(event) {
+        catchKeyPress($(this), event);
+    });
 });
