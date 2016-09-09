@@ -1181,7 +1181,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         self._assert_reg_field(
             {"honor_code": "required"},
             {
-                "label": "I agree to the {platform_name} {link_label}.".format(
+                "label": "I agree to the {platform_name} {link_label}".format(
                     platform_name=settings.PLATFORM_NAME,
                     link_label=link_label
                 ),
@@ -1309,8 +1309,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                 "type": "checkbox",
                 "required": True,
                 "errorMessages": {
-                    "required": "You must agree to the {platform_name} <span class=\"sr\">Terms of Service</span>"
-                    .format(
+                    "required": "You must agree to the {platform_name} <span class=\"sr\">Terms of Service</span>".format(  # pylint: disable=line-too-long
                         platform_name=settings.PLATFORM_NAME
                     )
                 }
