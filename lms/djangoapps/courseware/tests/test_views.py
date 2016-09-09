@@ -1345,13 +1345,11 @@ class ProgressPageTests(ModuleStoreTestCase):
         )
         self.assertContains(resp, u"Download Your Certificate")
 
-    # disable persistent grades until TNL-5458 (reduces query counts)
-    @patch.dict(settings.FEATURES, {'PERSISTENT_GRADES_ENABLED_FOR_ALL_TESTS': False})
     @ddt.data(
-        *itertools.product(((34, 4, True), (34, 4, False)), (True, False))
+        *itertools.product(((37, 4, True), (37, 4, False)), (True, False))
     )
     @ddt.unpack
-    def test_query_counts(self, (sql_calls, mongo_calls, self_paced), self_paced_enabled):
+    def test_progress_queries_paced_courses(self, (sql_calls, mongo_calls, self_paced), self_paced_enabled):
         """Test that query counts remain the same for self-paced and instructor-paced courses."""
         SelfPacedConfiguration(enabled=self_paced_enabled).save()
         self.setup_course(self_paced=self_paced)
@@ -1360,6 +1358,25 @@ class ProgressPageTests(ModuleStoreTestCase):
                 reverse('progress', args=[unicode(self.course.id)])
             )
         self.assertEqual(resp.status_code, 200)
+
+    def test_progress_queries(self):
+        def get_progress_page():
+            """
+            Gets the progress page for the user in the course.
+            """
+            resp = self.client.get(
+                reverse('progress', args=[unicode(self.course.id)])
+            )
+            self.assertEqual(resp.status_code, 200)
+
+        self.setup_course()
+        with self.assertNumQueries(37), check_mongo_calls(4):
+            get_progress_page()
+
+        # subsequent accesses to the progress page require fewer queries.
+        for _ in range(2):
+            with self.assertNumQueries(20), check_mongo_calls(4):
+                get_progress_page()
 
     @patch(
         'lms.djangoapps.grades.new.course_grade.CourseGrade.summary',
