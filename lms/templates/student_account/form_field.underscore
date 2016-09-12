@@ -66,6 +66,12 @@
         <% } %>
         <% if ( instructions ) { %> <span class="tip tip-input" id="<%= form %>-<%= name %>-desc"><%= instructions %></span><% } %>
     <% } %>
+    
+    <% if (termsLink && termsText) { %>
+        <div class="terms-link">
+            <a href="<%- termsLink %>"><%- termsText %></a>
+        </div>
+    <% } %>
 
     <% if( form === 'login' && name === 'password' ) { %>
         <button type="button" class="forgot-password field-link"><%- gettext("Forgot password?") %></button>
