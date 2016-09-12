@@ -755,26 +755,19 @@ class RegistrationView(APIView):
         """
         # Separate terms of service and honor code checkboxes
         if self._is_field_visible("terms_of_service"):
-            terms_text = _(u"<span class=\"sr\">Honor Code</span>")
-            link_text = _(u"Honor Code")
+            terms_text = _(u"Honor Code")
 
         # Combine terms of service and honor code checkboxes
         else:
             # Translators: This is a legal document users must agree to
             # in order to register a new account.
-            terms_text = _(u"<span class=\"sr\">Terms of Service and Honor Code</span>")
-            link_text = _(u"Terms of Service and Honor Code")
+            terms_text = _(u"Terms of Service and Honor Code")
 
         # Translators: "Terms of Service" is a legal document users must agree to
         # in order to register a new account.
         label = _(u"I agree to the {platform_name} {terms_of_service}").format(
             platform_name=configuration_helpers.get_value("PLATFORM_NAME", settings.PLATFORM_NAME),
             terms_of_service=terms_text
-        )
-
-        label_link = u"<a href=\"{url}\">{terms_text}</a>".format(
-            url=marketing_link("HONOR"),
-            terms_text=link_text
         )
 
         # Translators: "Terms of Service" is a legal document users must agree to
@@ -787,7 +780,6 @@ class RegistrationView(APIView):
         form_desc.add_field(
             "honor_code",
             label=label,
-            label_link=label_link,
             field_type="checkbox",
             default=False,
             required=required,
@@ -808,18 +800,13 @@ class RegistrationView(APIView):
         """
         # Translators: This is a legal document users must agree to
         # in order to register a new account.
-        terms_text = _(u"<span class=\"sr\">Terms of Service</span>")
+        terms_text = _(u"Terms of Service")
 
         # Translators: "Terms of service" is a legal document users must agree to
         # in order to register a new account.
         label = _(u"I agree to the {platform_name} {terms_of_service}").format(
             platform_name=configuration_helpers.get_value("PLATFORM_NAME", settings.PLATFORM_NAME),
             terms_of_service=terms_text
-        )
-
-        label_link = u"<a href=\"{url}\">{link_text}</a>".format(
-            url=marketing_link("TOS"),
-            link_text=terms_text
         )
 
         # Translators: "Terms of service" is a legal document users must agree to
@@ -832,7 +819,6 @@ class RegistrationView(APIView):
         form_desc.add_field(
             "terms_of_service",
             label=label,
-            label_link=label_link,
             field_type="checkbox",
             default=False,
             required=required,

@@ -138,7 +138,7 @@ class FormDescription(object):
     OVERRIDE_FIELD_PROPERTIES = [
         "label", "type", "defaultValue", "placeholder",
         "instructions", "required", "restrictions",
-        "options", "label_link"
+        "options"
     ]
 
     def __init__(self, method, submit_url):
@@ -158,7 +158,6 @@ class FormDescription(object):
             self, name, label=u"", field_type=u"text", default=u"",
             placeholder=u"", instructions=u"", required=True, restrictions=None,
             options=None, include_default_option=False, error_messages=None,
-            label_link=u"",
     ):
         """Add a field to the form description.
 
@@ -168,9 +167,6 @@ class FormDescription(object):
 
         Keyword Arguments:
             label (unicode): The label for the field (e.g. "E-mail" or "Username")
-
-            label_link (unicode): A link that goes with a label, since it's not advisable
-                to put links within labels.
 
             field_type (unicode): The type of the field.  See `ALLOWED_TYPES` for
                 acceptable values.
@@ -216,7 +212,6 @@ class FormDescription(object):
         field_dict = {
             "name": name,
             "label": label,
-            "label_link": label_link,
             "type": field_type,
             "defaultValue": default,
             "placeholder": placeholder,

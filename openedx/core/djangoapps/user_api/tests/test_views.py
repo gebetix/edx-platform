@@ -587,7 +587,6 @@ class LoginSessionViewTest(UserAPITestCase):
                 "type": "email",
                 "required": True,
                 "label": "Email",
-                "label_link": "",
                 "placeholder": "username@domain.com",
                 "instructions": "The email address you used to register with {platform_name}".format(
                     platform_name=settings.PLATFORM_NAME
@@ -604,7 +603,6 @@ class LoginSessionViewTest(UserAPITestCase):
                 "type": "password",
                 "required": True,
                 "label": "Password",
-                "label_link": "",
                 "placeholder": "",
                 "instructions": "",
                 "restrictions": {
@@ -619,7 +617,6 @@ class LoginSessionViewTest(UserAPITestCase):
                 "type": "checkbox",
                 "required": False,
                 "label": "Remember me",
-                "label_link": "",
                 "placeholder": "",
                 "instructions": "",
                 "restrictions": {},
@@ -752,7 +749,6 @@ class PasswordResetViewTest(UserAPITestCase):
                 "type": "email",
                 "required": True,
                 "label": "Email",
-                "label_link": "",
                 "placeholder": "username@domain.com",
                 "instructions": "The email address you used to register with {platform_name}".format(
                     platform_name=settings.PLATFORM_NAME
@@ -1177,7 +1173,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
     )
     @mock.patch.dict(settings.FEATURES, {"ENABLE_MKTG_SITE": True})
     def test_registration_honor_code_mktg_site_enabled(self):
-        link_label = '<span class=\"sr\">Terms of Service and Honor Code</span>'
+        link_label = 'Terms of Service and Honor Code'
         self._assert_reg_field(
             {"honor_code": "required"},
             {
@@ -1201,7 +1197,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
     @override_settings(MKTG_URLS_LINK_MAP={"HONOR": "honor"})
     @mock.patch.dict(settings.FEATURES, {"ENABLE_MKTG_SITE": False})
     def test_registration_honor_code_mktg_site_disabled(self):
-        link_label = '<span class=\"sr\">Terms of Service and Honor Code</span>'
+        link_label = 'Terms of Service and Honor Code'
         self._assert_reg_field(
             {"honor_code": "required"},
             {
@@ -1231,7 +1227,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
     def test_registration_separate_terms_of_service_mktg_site_enabled(self):
         # Honor code field should say ONLY honor code,
         # not "terms of service and honor code"
-        link_label = '<span class=\"sr\">Honor Code</span>'
+        link_label = 'Honor Code'
         self._assert_reg_field(
             {"honor_code": "required", "terms_of_service": "required"},
             {
@@ -1253,7 +1249,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         )
 
         # Terms of service field should also be present
-        link_label = '<span class=\"sr\">Terms of Service</span>'
+        link_label = 'Terms of Service'
         self._assert_reg_field(
             {"honor_code": "required", "terms_of_service": "required"},
             {
@@ -1282,7 +1278,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         self._assert_reg_field(
             {"honor_code": "required", "terms_of_service": "required"},
             {
-                "label": "I agree to the {platform_name} <span class=\"sr\">Honor Code</span>".format(
+                "label": "I agree to the {platform_name} Honor Code".format(
                     platform_name=settings.PLATFORM_NAME
                 ),
                 "name": "honor_code",
@@ -1290,7 +1286,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                 "type": "checkbox",
                 "required": True,
                 "errorMessages": {
-                    "required": "You must agree to the {platform_name} <span class=\"sr\">Honor Code</span>".format(
+                    "required": "You must agree to the {platform_name} Honor Code".format(
                         platform_name=settings.PLATFORM_NAME
                     )
                 }
@@ -1301,7 +1297,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
         self._assert_reg_field(
             {"honor_code": "required", "terms_of_service": "required"},
             {
-                "label": "I agree to the {platform_name} <span class=\"sr\">Terms of Service</span>".format(
+                "label": "I agree to the {platform_name} Terms of Service".format(
                     platform_name=settings.PLATFORM_NAME
                 ),
                 "name": "terms_of_service",
@@ -1309,7 +1305,7 @@ class RegistrationViewTest(ThirdPartyAuthTestMixin, UserAPITestCase):
                 "type": "checkbox",
                 "required": True,
                 "errorMessages": {
-                    "required": "You must agree to the {platform_name} <span class=\"sr\">Terms of Service</span>".format(  # pylint: disable=line-too-long
+                    "required": "You must agree to the {platform_name} Terms of Service".format(  # pylint: disable=line-too-long
                         platform_name=settings.PLATFORM_NAME
                     )
                 }

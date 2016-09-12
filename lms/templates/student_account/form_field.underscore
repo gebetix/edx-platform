@@ -59,13 +59,10 @@
             value="<%- defaultValue %>"
         />
         <% if ( type === 'checkbox' ) { %>
-            <div class="field-inline-label">
-                <label for="<%= form %>-<%= name %>">
-                    <%= label %>
-                </label>
-                <% if ( label_link ) { %> <%= label_link %><% } %>
+            <label for="<%= form %>-<%= name %>">
+                <%= label %>
                 <% if ( required && requiredStr ) { %> <%= requiredStr %><% } %>
-            </div>
+            </label>
         <% } %>
         <% if ( instructions ) { %> <span class="tip tip-input" id="<%= form %>-<%= name %>-desc"><%= instructions %></span><% } %>
     <% } %>

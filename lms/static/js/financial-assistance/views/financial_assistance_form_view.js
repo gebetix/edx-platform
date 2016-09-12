@@ -32,7 +32,6 @@
                  fieldTpl: formFieldTpl,
                  formType: 'financial-assistance',
                  requiredStr: '',
-                 label_link: '',
                  submitButton: '.js-submit-form',
 
                  initialize: function(data) {
