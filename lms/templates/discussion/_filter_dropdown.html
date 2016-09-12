@@ -20,6 +20,7 @@ from openedx.core.djangolib.markup import HTML
         class="forum-nav-browse-menu-item"
         data-discussion-id='${entries[entry]["id"]}'
         data-cohorted="${str(entries[entry]['is_cohorted']).lower()}"
+        role="option"
     >
         <button type="button" class="forum-nav-browse-title">${entry}</button>
     </li>
@@ -34,19 +35,19 @@ from openedx.core.djangolib.markup import HTML
     </li>
 </%def>
 
-<div class="forum-nav-browse-menu-wrapper" style="display: none">
+<div class="forum-nav-browse-menu-wrapper" style="display: none" role="combobox" aria-label="${_("Discussion thread list")}" aria-expanded="true" aria-owns="discussion_topics_listbox">
     <form class="forum-nav-browse-filter">
         <label>
             <span class="sr">${_("Filter Topics")}</span>
-            <input type="text" class="forum-nav-browse-filter-input" placeholder="${_("filter topics")}">
+            <input type="text" aria-autocomplete="list" class="forum-nav-browse-filter-input" placeholder="${_("filter topics")}">
             <span class="icon fa fa-filter" aria-hidden="true"></span>
         </label>
     </form>
-    <ul class="forum-nav-browse-menu">
-        <li class="forum-nav-browse-menu-item forum-nav-browse-menu-all">
+    <ul class="forum-nav-browse-menu" role="listbox" id="discussion_topics_listbox">
+        <li class="forum-nav-browse-menu-item forum-nav-browse-menu-all" role="option">
             <button type="button" class="forum-nav-browse-title">${_("All Discussions")}</button>
         </li>
-        <li class="forum-nav-browse-menu-item forum-nav-browse-menu-following">
+        <li class="forum-nav-browse-menu-item forum-nav-browse-menu-following" role="option">
             <button type="button" class="forum-nav-browse-title">
                 <span class="icon fa fa-star" aria-hidden="true"></span>
                 ${_("Posts I'm Following")}
