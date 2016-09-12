@@ -29,7 +29,9 @@
                                 required: true,
                                 placeholder: 'xsy@edx.org',
                                 instructions: 'Enter your email here.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 name: 'username',
@@ -41,7 +43,9 @@
                                 instructions: 'Enter your username here.',
                                 restrictions: {
                                     max_length: 200
-                                }
+                                },
+                                termsLink: '',
+                                termsText: ''
                             }
                         ]
                     },

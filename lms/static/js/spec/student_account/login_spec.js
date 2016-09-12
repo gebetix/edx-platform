@@ -54,7 +54,9 @@
                                 type: 'email',
                                 required: true,
                                 instructions: 'Enter your email.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -64,7 +66,9 @@
                                 type: 'password',
                                 required: true,
                                 instructions: 'Enter your password.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -74,7 +78,9 @@
                                 type: 'checkbox',
                                 required: true,
                                 instructions: 'Agree to the terms of service.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             }
                         ]
                     },

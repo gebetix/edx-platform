@@ -25,7 +25,9 @@
                             required: true,
                             placeholder: 'place@holder.org',
                             instructions: 'Enter your email.',
-                            restrictions: {}
+                            restrictions: {},
+                            termsLink: '',
+                            termsText: ''
                         }]
                     };
 

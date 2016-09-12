@@ -59,7 +59,9 @@
                                 type: 'email',
                                 required: true,
                                 instructions: 'Enter your email.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: 'Jane Doe',
@@ -69,7 +71,9 @@
                                 type: 'text',
                                 required: true,
                                 instructions: 'Enter your username.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: 'JaneDoe',
@@ -79,7 +83,9 @@
                                 type: 'text',
                                 required: true,
                                 instructions: 'Enter your username.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -89,7 +95,9 @@
                                 type: 'password',
                                 required: true,
                                 instructions: 'Enter your password.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -105,7 +113,9 @@
                                 ],
                                 required: false,
                                 instructions: 'Select your education level.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -121,7 +131,9 @@
                                 ],
                                 required: false,
                                 instructions: 'Select your gender.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -137,7 +149,9 @@
                                 ],
                                 required: false,
                                 instructions: 'Select your year of birth.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -147,7 +161,9 @@
                                 type: 'textarea',
                                 required: false,
                                 instructions: 'Enter your mailing address.',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -157,7 +173,9 @@
                                 type: 'textarea',
                                 required: false,
                                 instructions: "If you'd like, tell us why you're interested in edX.",
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             },
                             {
                                 placeholder: '',
@@ -167,7 +185,9 @@
                                 type: 'checkbox',
                                 required: true,
                                 instructions: '',
-                                restrictions: {}
+                                restrictions: {},
+                                termsLink: '',
+                                termsText: ''
                             }
                         ]
                     };

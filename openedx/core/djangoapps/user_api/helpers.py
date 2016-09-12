@@ -198,9 +198,9 @@ class FormDescription(object):
                 Currently, the only supported key is "required" indicating
                 that the messages should be displayed if the user does
                 not provide a value for a required field.
-            
+
             termsLink (unicode): The link to the Terms of Service or Honor Code
-            
+
             termsText (unicode): The text for the link to the above
 
         Raises:
