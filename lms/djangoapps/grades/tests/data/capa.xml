@@ -1,0 +1,14 @@
+<course>
+  <chapter>
+    <sequential>
+      <vertical>
+        <problem url_name="capa-optionresponse">
+          <optionresponse>
+            <optioninput options="('Correct', 'Incorrect')" correct="Correct"></optioninput>
+            <optioninput options="('Correct', 'Incorrect')" correct="Correct"></optioninput>
+          </optionresponse>
+        </problem>
+      </vertical>
+    </sequential>
+  </chapter>
+</course>

@@ -1,0 +1,9 @@
+<course>
+  <chapter>
+    <sequential>
+      <vertical>
+        {problem_xml}
+      </vertical>
+    </sequential>
+  </chapter>
+</course>
