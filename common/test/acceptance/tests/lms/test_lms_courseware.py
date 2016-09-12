@@ -14,6 +14,7 @@ from capa.tests.response_xml_factory import MultipleChoiceResponseXMLFactory
 from ..helpers import UniqueCourseTest, EventsTestMixin
 from ...pages.studio.auto_auth import AutoAuthPage
 from ...pages.lms.create_mode import ModeCreationPage
+from ...pages.studio.html_component_editor import HtmlComponentEditorView
 from ...pages.studio.overview import CourseOutlinePage
 from ...pages.lms.courseware import CoursewarePage, CoursewareSequentialTabPage
 from ...pages.lms.course_nav import CourseNavPage
@@ -918,6 +919,9 @@ class ProgressPageTest(UniqueCourseTest):
     """
     USERNAME = "STUDENT_TESTER"
     EMAIL = "student101@example.com"
+    SECTION_NAME = 'Test Section 1'
+    SUBSECTION_NAME = 'Test Subsection 1'
+    PROBLEM_NAME = 'Test Problem 1'
 
     def setUp(self):
         super(ProgressPageTest, self).setUp()
@@ -943,9 +947,9 @@ class ProgressPageTest(UniqueCourseTest):
         )
 
         course_fix.add_children(
-            XBlockFixtureDesc('chapter', 'Test Section 1').add_children(
-                XBlockFixtureDesc('sequential', 'Test Subsection 1').add_children(
-                    create_multiple_choice_problem('Test Problem 1')
+            XBlockFixtureDesc('chapter', self.SECTION_NAME).add_children(
+                XBlockFixtureDesc('sequential', self.SUBSECTION_NAME).add_children(
+                    create_multiple_choice_problem(self.PROBLEM_NAME)
                 )
             )
         ).install()
@@ -975,24 +979,82 @@ class ProgressPageTest(UniqueCourseTest):
         Return a list of scores from the progress page.
         """
         self.progress_page.visit()
-        return self.progress_page.section_score('Test Section 1', 'Test Subsection 1')
+        return self.progress_page.section_score(self.SECTION_NAME, self.SUBSECTION_NAME)
 
     def _get_scores(self):
         """
         Return a list of scores from the progress page.
         """
         self.progress_page.visit()
-        return self.progress_page.scores('Test Section 1', 'Test Subsection 1')
+        return self.progress_page.scores(self.SECTION_NAME, self.SUBSECTION_NAME)
 
     @contextmanager
-    def _logged_in_session(self):
+    def _logged_in_session(self, staff=False):
         """
         Ensure that the user is logged in and out appropriately at the beginning
         and end of the current test.
         """
         self.logout_page.visit()
         try:
-            _auto_auth(self.browser, self.USERNAME, self.EMAIL, False, self.course_id)
+            if staff:
+                _auto_auth(self.browser, "STAFF_TESTER", "staff101@example.com", True, self.course_id)
+            else:
+                _auto_auth(self.browser, self.USERNAME, self.EMAIL, False, self.course_id)
             yield
         finally:
             self.logout_page.visit()
+
+
+@ddt.ddt
+class PersistentGradesTest(ProgressPageTest):
+    def _add_problem_to_subsection(self):
+        with self._logged_in_session(staff=True):
+            self.course_outline.visit()
+            subsection = self.course_outline_page.section(self.SECTION_NAME).subsection(self.SUBSECTION_NAME)
+            subsection.add_children(create_multiple_choice_problem(self.PROBLEM_NAME + "2"))
+
+    def _make_content_hidden(self):
+        with self._logged_in_session(staff=True):
+            pass
+
+    def _change_weight_for_problem(self):
+        with self._logged_in_session(staff=True):
+            pass
+
+    def _rescore_for_all(self):
+        with self._logged_in_session(staff=True):
+            pass
+
+    def _edit_problem_content(self):
+        with self._logged_in_session(staff=True):
+            subsection = self.course_outline_page.section(self.SECTION_NAME).subsection(self.SUBSECTION_NAME)
+            unit = subsection.expand_subsection().unit(self.PROBLEM_NAME).go_to()
+            modified_content = "<p>modified content</p>"
+            container = unit.xblocks[1].go_to_container()
+            component = container.xblocks[1].children[0]
+            component.edit()
+
+            html_editor = HtmlComponentEditorView(self.browser, component.locator)
+            html_editor.set_content_and_save(modified_content, raw=True)
+
+            # ensure that the problem content has actually been updated
+            self.assertEqual(component.student_content, "modified content")
+
+    @ddt.data(
+        _edit_problem_content,
+        _add_problem_to_subsection
+    )
+    def test_content_changes_do_not_change_score(self, edit):
+        with self._logged_in_session():
+            self.assertEqual(self._get_scores(), [(0, 1)])
+            self.assertEqual(self._get_section_score(), (0, 1))
+            self.courseware_page.visit()
+            self._answer_problem_correctly()
+            self.assertEqual(self._get_scores(), [(1, 1)])
+            self.assertEqual(self._get_section_score(), (1, 1))
+
+        edit()
+
+        with self._logged_in_session():
+            self.assertEqual(self._get_scores(), [(1, 1)])
+            self.assertEqual(self._get_section_score(), (1, 1))
