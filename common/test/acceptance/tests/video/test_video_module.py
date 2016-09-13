@@ -491,15 +491,14 @@ class YouTubeVideoTest(VideoBaseTest):
         self.assertTrue(self.video.is_button_shown('transcript_button'))
         self._verify_caption_text('Welcome to edX.')
 
-    def test_download_transcript_button_works_correctly(self):
+    def test_download_transcript_links_work_correctly(self):
         """
-        Scenario: Download Transcript button works correctly
+        Scenario: Download transcript links work correctly
         Given the course has Video components A and B in "Youtube" mode
         And Video component C in "HTML5" mode
         And I have defined downloadable transcripts for the videos
         Then I can download a transcript for Video A in "srt" format
         And I can download a transcript for Video A in "txt" format
-        And I can download a transcript for Video B in "txt" format
         And the Download Transcript menu does not exist for Video C
         """
 
@@ -525,6 +524,9 @@ class YouTubeVideoTest(VideoBaseTest):
 
         # check if we can download transcript in "srt" format that has text "00:00:00,260"
         self.assertTrue(self.video.downloaded_transcript_contains_text('srt', '00:00:00,260'))
+        
+        # check if we can download transcript in "txt" format
+        self.assertTrue(self.video.downloaded_transcript_contains_text('txt', 'Welcome to edX.'))
 
         # open vertical containing video "C"
         self.course_nav.go_to_vertical('Test Vertical-2')
