@@ -24,6 +24,7 @@ class BlockRecordListTestCase(TestCase):
     Verify the behavior of BlockRecordList, particularly around edge cases
     """
     def setUp(self):
+        super(BlockRecordListTestCase, self).setUp()
         self.course_key = CourseLocator(
             org='some_org',
             course='some_course',
