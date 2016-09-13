@@ -42,19 +42,14 @@
         text-align: center;
         text-decoration: none;
 
-        &:hover,
-        &:focus {
-          color: $uxpl-blue-hover-active;
-          border-bottom: 4px solid $uxpl-blue-hover-active;
-        }
-
+        &,
         &.active {
-          border-bottom: 4px solid $uxpl-blue-base;
-          color: $uxpl-blue-base;
+          border-bottom: 4px solid $uxpl-blue-hover-active;
+          color: $uxpl-blue-hover-active;
 
           &:hover,
           &:focus {
-            color: $uxpl-blue-base;
+            color: $uxpl-blue-hover-active;
           }
         }
       }
