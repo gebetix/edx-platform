@@ -160,8 +160,7 @@ class ProblemTypeTestMixin(object):
         self.answer_problem(correctness='correct')
         self.problem_page.click_submit()
         self.wait_for_status('correct')
-        self.problem_page.wait_success_notification_visible()
-        self.assertTrue(self.problem_page.is_focus_on_submit_notification())
+        self.problem_page.wait_success_notification()
 
         # Check for corresponding tracking event
         expected_events = [
@@ -198,8 +197,7 @@ class ProblemTypeTestMixin(object):
         self.answer_problem(correctness='incorrect')
         self.problem_page.click_submit()
         self.wait_for_status('incorrect')
-        self.problem_page.wait_incorrect_notification_visible()
-        self.assertTrue(self.problem_page.is_focus_on_submit_notification())
+        self.problem_page.wait_incorrect_notification()
 
     @attr(shard=7)
     def test_submit_blank_answer(self):
@@ -299,7 +297,7 @@ class ProblemTypeTestMixin(object):
         # Set an answer
         self.answer_problem(correctness='partially-correct')
         self.problem_page.click_submit()
-        self.problem_page.wait_partial_notification_visible()
+        self.problem_page.wait_partial_notification()
 
     @attr('a11y')
     def test_problem_type_a11y(self):
