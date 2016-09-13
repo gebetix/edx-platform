@@ -14,6 +14,7 @@ from capa.tests.response_xml_factory import MultipleChoiceResponseXMLFactory
 from ..helpers import UniqueCourseTest, EventsTestMixin
 from ...pages.studio.auto_auth import AutoAuthPage
 from ...pages.lms.create_mode import ModeCreationPage
+from ...pages.studio.component_editor import ComponentEditorView, ComponentVisibilityEditorView
 from ...pages.studio.html_component_editor import HtmlComponentEditorView
 from ...pages.studio.overview import CourseOutlinePage
 from ...pages.lms.courseware import CoursewarePage, CoursewareSequentialTabPage
@@ -1019,7 +1020,10 @@ class PersistentGradesTest(ProgressPageTest):
 
     def _change_weight_for_problem(self):
         with self._logged_in_session(staff=True):
-            pass
+            subsection = self.course_outline_page.section(self.SECTION_NAME).subsection(self.SUBSECTION_NAME)
+            unit = subsection.expand_subsection().unit(self.PROBLEM_NAME).go_to()
+            component_editor = ComponentEditorView(self.browser, unit.locator)
+            component_editor.set_field_value_and_save('Problem Weight', 5)
 
     def _rescore_for_all(self):
         with self._logged_in_session(staff=True):
@@ -1042,7 +1046,8 @@ class PersistentGradesTest(ProgressPageTest):
 
     @ddt.data(
         _edit_problem_content,
-        _add_problem_to_subsection
+        _add_problem_to_subsection,
+        _change_weight_for_problem
     )
     def test_content_changes_do_not_change_score(self, edit):
         with self._logged_in_session():
@@ -1053,7 +1058,7 @@ class PersistentGradesTest(ProgressPageTest):
             self.assertEqual(self._get_scores(), [(1, 1)])
             self.assertEqual(self._get_section_score(), (1, 1))
 
-        edit()
+        self.edit()
 
         with self._logged_in_session():
             self.assertEqual(self._get_scores(), [(1, 1)])
