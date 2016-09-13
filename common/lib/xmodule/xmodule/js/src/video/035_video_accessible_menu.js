@@ -2,8 +2,8 @@
     'use strict';
 // VideoTranscriptDownloadHandler module.
     define(
-        'video/035_video_accessible_menu.js', ['underscore'],
-        function(_) {
+'video/035_video_accessible_menu.js', ['underscore'],
+    function(_) {
     /**
      * Video Download Transcript control module.
      * @exports video/035_video_accessible_menu.js
@@ -11,22 +11,22 @@
      * @param {jquery Element} element
      * @param {Object} options
      */
-    var VideoTranscriptDownloadHandler = function(element, options) {
-        if (!(this instanceof VideoTranscriptDownloadHandler)) {
-            return new VideoTranscriptDownloadHandler(element, options);
-        }
+        var VideoTranscriptDownloadHandler = function(element, options) {
+            if (!(this instanceof VideoTranscriptDownloadHandler)) {
+                return new VideoTranscriptDownloadHandler(element, options);
+            }
 
-        _.bindAll(this, 'bindHandlers', 'clickHandler');
+            _.bindAll(this, 'bindHandlers', 'clickHandler');
 
-        this.container = element;
-        this.options = options || {};
+            this.container = element;
+            this.options = options || {};
 
-        if (this.container.find('.wrapper-downloads .wrapper-download-transcripts')) {
-            this.initialize();
-        }
+            if (this.container.find('.wrapper-downloads .wrapper-download-transcripts')) {
+                this.initialize();
+            }
 
-        return false;
-    };
+            return false;
+        };
 
     VideoTranscriptDownloadHandler.prototype = {
         // Initializes the module.
