@@ -790,8 +790,8 @@ class RegistrationView(APIView):
             error_messages={
                 "required": error_msg
             },
-            termsLink=terms_link,
-            termsText=terms_text
+            supplementalLink=terms_link,
+            supplementalText=terms_text
         )
 
     def _add_terms_of_service_field(self, form_desc, required=True):
@@ -833,8 +833,8 @@ class RegistrationView(APIView):
             error_messages={
                 "required": error_msg
             },
-            termsLink=terms_link,
-            termsText=terms_text
+            supplementalLink=terms_link,
+            supplementalText=terms_text
         )
 
     def _apply_third_party_auth_overrides(self, request, form_desc):

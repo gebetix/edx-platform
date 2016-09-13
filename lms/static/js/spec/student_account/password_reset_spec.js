@@ -26,8 +26,8 @@
                             placeholder: 'place@holder.org',
                             instructions: 'Enter your email.',
                             restrictions: {},
-                            termsLink: '',
-                            termsText: ''
+                            supplementalLink: '',
+                            supplementalText: ''
                         }]
                     };
 

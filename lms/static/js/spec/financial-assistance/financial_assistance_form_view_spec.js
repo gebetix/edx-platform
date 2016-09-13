@@ -26,8 +26,8 @@ define([
                         required: true,
                         requiredStr: '',
                         type: 'select',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }, {
                         defaultValue: '',
                         instructions: 'Specify your annual income in USD.',
@@ -43,8 +43,8 @@ define([
                         placeholder: '',
                         required: true,
                         type: 'select',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }, {
                         defaultValue: '',
                         instructions: 'Your response should contain approximately 250 - 500 words.',
@@ -57,8 +57,8 @@ define([
                             max_length: 2500
                         },
                         type: 'textarea',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }, {
                         defaultValue: '',
                         instructions: 'Use between 250 and 500 words or so in your response.',
@@ -71,8 +71,8 @@ define([
                             max_length: 2500
                         },
                         type: 'textarea',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }, {
                         defaultValue: '',
                         instructions: 'Use between 250 and 500 words or so in your response.',
@@ -85,8 +85,8 @@ define([
                             max_length: 2500
                         },
                         type: 'textarea',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }, {
                         defaultValue: '',
                         instructions: 'Annual income and personal information such as email address will not be shared.',
@@ -96,8 +96,8 @@ define([
                         required: false,
                         restrictions: {},
                         type: 'checkbox',
-                        termsLink: '',
-                        termsText: ''
+                        supplementalLink: '',
+                        supplementalText: ''
                     }
                 ],
                 user_details: {

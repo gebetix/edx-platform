@@ -55,8 +55,8 @@
                                 required: true,
                                 instructions: 'Enter your email.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -67,8 +67,8 @@
                                 required: true,
                                 instructions: 'Enter your password.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -79,8 +79,8 @@
                                 required: true,
                                 instructions: 'Agree to the terms of service.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             }
                         ]
                     },

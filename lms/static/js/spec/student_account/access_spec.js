@@ -30,8 +30,8 @@
                                 placeholder: 'xsy@edx.org',
                                 instructions: 'Enter your email here.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 name: 'username',
@@ -44,8 +44,8 @@
                                 restrictions: {
                                     max_length: 200
                                 },
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             }
                         ]
                     },

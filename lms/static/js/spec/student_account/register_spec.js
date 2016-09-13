@@ -60,8 +60,8 @@
                                 required: true,
                                 instructions: 'Enter your email.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: 'Jane Doe',
@@ -72,8 +72,8 @@
                                 required: true,
                                 instructions: 'Enter your username.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: 'JaneDoe',
@@ -84,8 +84,8 @@
                                 required: true,
                                 instructions: 'Enter your username.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -96,8 +96,8 @@
                                 required: true,
                                 instructions: 'Enter your password.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -114,8 +114,8 @@
                                 required: false,
                                 instructions: 'Select your education level.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -132,8 +132,8 @@
                                 required: false,
                                 instructions: 'Select your gender.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -150,8 +150,8 @@
                                 required: false,
                                 instructions: 'Select your year of birth.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -162,8 +162,8 @@
                                 required: false,
                                 instructions: 'Enter your mailing address.',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -174,8 +174,8 @@
                                 required: false,
                                 instructions: "If you'd like, tell us why you're interested in edX.",
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             },
                             {
                                 placeholder: '',
@@ -186,8 +186,8 @@
                                 required: true,
                                 instructions: '',
                                 restrictions: {},
-                                termsLink: '',
-                                termsText: ''
+                                supplementalLink: '',
+                                supplementalText: ''
                             }
                         ]
                     };

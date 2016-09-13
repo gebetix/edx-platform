@@ -138,7 +138,7 @@ class FormDescription(object):
     OVERRIDE_FIELD_PROPERTIES = [
         "label", "type", "defaultValue", "placeholder",
         "instructions", "required", "restrictions",
-        "options", "terms_link", "terms_text"
+        "options", "supplementalLink", "supplementalText"
     ]
 
     def __init__(self, method, submit_url):
@@ -158,7 +158,7 @@ class FormDescription(object):
             self, name, label=u"", field_type=u"text", default=u"",
             placeholder=u"", instructions=u"", required=True, restrictions=None,
             options=None, include_default_option=False, error_messages=None,
-            termsLink=u"", termsText=u"",
+            supplementalLink=u"", supplementalText=u"",
     ):
         """Add a field to the form description.
 
@@ -199,9 +199,11 @@ class FormDescription(object):
                 that the messages should be displayed if the user does
                 not provide a value for a required field.
 
-            termsLink (unicode): The link to the Terms of Service or Honor Code
+            supplementalLink (unicode): A qualified URL to provide supplemental information
+                for the form field. An example may be a link to documentation for creating 
+                strong passwords.
 
-            termsText (unicode): The text for the link to the above
+            supplementalText (unicode): The visible text for the supplemental link avoe.
 
         Raises:
             InvalidFieldError
@@ -224,8 +226,8 @@ class FormDescription(object):
             "required": required,
             "restrictions": {},
             "errorMessages": {},
-            "termsLink": termsLink,
-            "termsText": termsText
+            "supplementalLink": supplementalLink,
+            "supplementalText": supplementalText
         }
 
         if field_type == "select":
