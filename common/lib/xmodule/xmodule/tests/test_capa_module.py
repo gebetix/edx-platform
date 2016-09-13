@@ -1208,6 +1208,7 @@ class CapaModuleTest(unittest.TestCase):
 
         context = render_args[1]
         self.assertEqual(context['problem']['html'], "<div>Test Problem HTML</div>")
+        self.assertEqual(bool(context['should_enable_submit_button']), enable_submit_button)
         self.assertEqual(bool(context['reset_button']), show_reset_button)
         self.assertEqual(bool(context['save_button']), show_save_button)
 
@@ -1547,7 +1548,7 @@ class CapaModuleTest(unittest.TestCase):
         module = CapaFactory.create()
         module.get_progress = Mock(wraps=module.get_progress)
         module.get_html()
-        module.get_progress.assert_called_with()
+        module.get_progress.assert_called_once_with()
 
     def test_get_problem(self):
         """
