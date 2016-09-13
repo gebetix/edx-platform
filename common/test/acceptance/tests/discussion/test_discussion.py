@@ -528,7 +528,6 @@ class DiscussionOpenClosedThreadTest(BaseDiscussionTestCase):
         page.a11y_audit.config.set_rules({
             'ignore': [
                 'section',  # TODO: AC-491
-                'color-contrast',  # TNL-4644
                 'icon-aria-hidden',  # TNL-4645
             ]
         })
