@@ -45,15 +45,12 @@ function(_) {
 
         // Various event handlers. We delay link clicks until tileType is set
         clickHandler: function(event) {
-            event.preventDefault();
-            this.changeFileType.call(this, event);
-        },
-
-        changeFileType: function(event) {
             var fileType = $(event.currentTarget).data('value'),
                 data = {transcript_download_format: fileType},
                 url = $(event.currentTarget).attr('href'),
                 that = this;
+
+            event.preventDefault();
 
             $.ajax({
                 async: false,
