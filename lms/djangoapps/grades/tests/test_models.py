@@ -23,17 +23,24 @@ class BlockRecordListTestCase(TestCase):
     """
     Verify the behavior of BlockRecordList, particularly around edge cases
     """
-    empty_json = '{"blocks":[],"course_key":null}'
+    def setUp(self):
+        self.course_key = CourseLocator(
+            org='some_org',
+            course='some_course',
+            run='some_run'
+        )
 
     def test_empty_block_record_set(self):
+        empty_json = '{0}"blocks":[],"course_key":"{1}"{2}'.format('{', unicode(self.course_key), '}')
+
         brs = BlockRecordList(())
         self.assertFalse(brs)
         self.assertEqual(
-            brs.to_json(),
-            self.empty_json
+            brs.to_json(self.course_key),
+            empty_json
         )
         self.assertEqual(
-            BlockRecordList.from_json(self.empty_json),
+            BlockRecordList.from_json(empty_json),
             brs
         )
 
