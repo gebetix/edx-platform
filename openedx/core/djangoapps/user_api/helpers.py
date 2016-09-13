@@ -200,7 +200,7 @@ class FormDescription(object):
                 not provide a value for a required field.
 
             supplementalLink (unicode): A qualified URL to provide supplemental information
-                for the form field. An example may be a link to documentation for creating 
+                for the form field. An example may be a link to documentation for creating
                 strong passwords.
 
             supplementalText (unicode): The visible text for the supplemental link avoe.

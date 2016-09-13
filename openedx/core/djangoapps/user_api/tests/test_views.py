@@ -596,6 +596,8 @@ class LoginSessionViewTest(UserAPITestCase):
                     "max_length": EMAIL_MAX_LENGTH
                 },
                 "errorMessages": {},
+                "supplementalText": "",
+                "supplementalLink": "",
             },
             {
                 "name": "password",
@@ -610,6 +612,8 @@ class LoginSessionViewTest(UserAPITestCase):
                     "max_length": PASSWORD_MAX_LENGTH
                 },
                 "errorMessages": {},
+                "supplementalText": "",
+                "supplementalLink": "",
             },
             {
                 "name": "remember",
@@ -621,6 +625,8 @@ class LoginSessionViewTest(UserAPITestCase):
                 "instructions": "",
                 "restrictions": {},
                 "errorMessages": {},
+                "supplementalText": "",
+                "supplementalLink": "",
             },
         ])
 
@@ -758,6 +764,8 @@ class PasswordResetViewTest(UserAPITestCase):
                     "max_length": EMAIL_MAX_LENGTH
                 },
                 "errorMessages": {},
+                "supplementalText": "",
+                "supplementalLink": "",
             }
         ])
 
